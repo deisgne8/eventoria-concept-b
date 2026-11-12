@@ -29,7 +29,7 @@
         const i = (y * 600 + x) * 4;
         if (data[i] > 100 && data[i + 1] > 100 && data[i + 2] > 100 && Math.random() < .42) points.push([(x + (Math.random() - .5) * 2.4) / 600, (y + (Math.random() - .5) * 2.4) / 400, Math.random() * 6.28]);
       }
-      const particles = points.map(([x, y, phase]) => ({ x: Math.random(), y: Math.random(), tx: x, ty: y, vx: 0, vy: 0, phase }));
+      const particles = points.map(([x, y, phase]) => ({ x: Math.random(), y: Math.random(), tx: x, ty: y, phase }));
       let visible = false, frame = 0, last = 0;
       const draw = now => {
         const w = canvas.clientWidth, h = canvas.clientHeight, dpr = Math.min(devicePixelRatio || 1, 2);
@@ -58,8 +58,9 @@
                 targetY += dy * push / (400 * scale);
               }
             }
-            p.vx += (targetX - p.x) * dt * 9; p.vy += (targetY - p.y) * dt * 9;
-            p.vx *= .86; p.vy *= .86; p.x += p.vx * dt; p.y += p.vy * dt;
+            const response = 1 - Math.exp(-dt * 14);
+            p.x += (targetX - p.x) * response;
+            p.y += (targetY - p.y) * response;
           }
           const mix = Math.max(0, Math.min(1, p.y * .72 + p.x * .28));
           const r = Math.round(35 + mix * 50), g = Math.round(130 + mix * 70), b = Math.round(165 + mix * 73);
