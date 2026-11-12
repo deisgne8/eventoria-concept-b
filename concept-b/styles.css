@@ -2205,3 +2205,14 @@ body.process-page .process-card:nth-child(even)>*{margin-left:0!important}
 }
 
 
+
+/* Keep Expertise particle illustrations on the page background. */
+body.expertise-page .expertise-split-visual::before,
+body.expertise-page .expertise-split-visual::after,
+body.expertise-page .expertise-split-layout .expertise-content-card::before {
+  background: none !important;
+}
+body.expertise-page .expertise-illustration-particles,
+body.expertise-page .expertise-card-particle {
+  pointer-events: auto;
+}

@@ -8,14 +8,7 @@
     canvas.setAttribute('aria-hidden', 'true');
     card.prepend(canvas);
     const ctx = canvas.getContext('2d');
-    let pointer = null;
-    canvas.addEventListener('pointermove', event => {
-      if (event.pointerType === 'touch') return;
-      pointer = { x: event.clientX, y: event.clientY };
-    });
-    const clearPointer = () => { pointer = null; };
-    canvas.addEventListener('pointerleave', clearPointer);
-    canvas.addEventListener('pointercancel', clearPointer);
+    const spring = window.createParticleSpring(canvas);
     const image = new Image();
     image.src = `assets/process/particle-${names[index]}.png`;
     image.onload = () => {
@@ -29,7 +22,7 @@
         const i = (y * 600 + x) * 4;
         if (data[i] > 100 && data[i + 1] > 100 && data[i + 2] > 100 && Math.random() < .42) points.push([(x + (Math.random() - .5) * 2.4) / 600, (y + (Math.random() - .5) * 2.4) / 400, Math.random() * 6.28]);
       }
-      const particles = points.map(([x, y, phase]) => ({ x: Math.random(), y: Math.random(), tx: x, ty: y, phase }));
+      const particles = points.map(([x, y, phase]) => ({ x: Math.random(), y: Math.random(), tx: x, ty: y, vx: 0, vy: 0, phase }));
       let visible = false, frame = 0, last = 0;
       const draw = now => {
         const w = canvas.clientWidth, h = canvas.clientHeight, dpr = Math.min(devicePixelRatio || 1, 2);
@@ -40,28 +33,9 @@
         const dt = last ? Math.min(.035, (now - last) / 1000) : .016;
         last = now;
         ctx.shadowColor = 'rgba(85,200,238,.5)'; ctx.shadowBlur = 1.4;
-        const bounds = pointer && canvas.getBoundingClientRect();
-        const mouseX = bounds ? pointer.x - bounds.left : 0;
-        const mouseY = bounds ? pointer.y - bounds.top : 0;
-        const radius = 65;
+        const move = spring(dt, ox, oy, 600 * scale, 400 * scale);
         particles.forEach(p => {
-          if (reduced.matches) { p.x = p.tx; p.y = p.ty; }
-          else {
-            let targetX = p.tx, targetY = p.ty;
-            if (bounds) {
-              const dx = ox + p.tx * 600 * scale - mouseX;
-              const dy = oy + p.ty * 400 * scale - mouseY;
-              const distance = Math.hypot(dx, dy);
-              if (distance > 0 && distance < radius) {
-                const push = 30 * (1 - distance / radius) ** 2 / distance;
-                targetX += dx * push / (600 * scale);
-                targetY += dy * push / (400 * scale);
-              }
-            }
-            const response = 1 - Math.exp(-dt * 14);
-            p.x += (targetX - p.x) * response;
-            p.y += (targetY - p.y) * response;
-          }
+          move(p, p.tx, p.ty);
           const mix = Math.max(0, Math.min(1, p.y * .72 + p.x * .28));
           const r = Math.round(35 + mix * 50), g = Math.round(130 + mix * 70), b = Math.round(165 + mix * 73);
           ctx.fillStyle = `rgba(${r},${g},${b},${.72 + Math.sin(now * .002 + p.phase) * .08})`;
