@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102b35">
+<meta name="description" content="Contact Eventoria about creative direction, event design and live delivery.">
+<title>Contact — Eventoria</title>
+<link rel="icon" href="assets/eventoria-logo.svg">
+<link rel="stylesheet" href="styles.css?v=contact-20261102-2">
+<link rel="stylesheet" href="typography.css?v=contact-20261030-3">
+<link rel="stylesheet" href="core.css?v=contact-20261030-3">
+<link rel="stylesheet" href="responsive.css?v=contact-20261030-3">
+</head>
+<body class="contact-page">
+<header class="sticky-header is-visible" aria-label="Site header">
+  <a class="contact-header-brand" href="index.html" aria-label="Eventoria home"><img src="assets/eventoria-wordmark.svg" alt="Eventoria — Events &amp; Concepts"></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="full-menu" aria-label="Open menu"><span class="menu-icon" aria-hidden="true"><i></i><i></i><i></i></span></button>
+</header>
+<div class="full-menu" id="full-menu" role="dialog" aria-modal="true" aria-label="Main navigation" inert>
+  <nav class="menu-list" aria-label="Main navigation">
+    <a href="Work.html">Work <span>◆</span></a>
+    <a href="Expertise.html">Expertise <span>◆</span></a>
+    <a href="Process.html">Process <span>◆</span></a>
+    <a href="About.html">About <span>◆</span></a>
+  </nav>
+  <a class="menu-contact" href="Contact.html" aria-current="page">Start an enquiry</a>
+  <span class="menu-signoff">EVENTORIA / EVENTS &amp; CONCEPTS</span>
+</div>
+
+<main>
+  <section class="contact-page-hero" aria-labelledby="contact-page-title">
+    <canvas id="field" aria-hidden="true"></canvas>
+    <div class="contact-page-hero-inner">
+      <p class="contact-page-eyebrow">CONTACT</p>
+      <h1 id="contact-page-title">Bring us the<br><em>occasion.</em></h1>
+      <p class="contact-page-lead">Share a brief, talk to the team, request a meeting or start a confidential conversation.</p>
+    </div>
+  </section>
+
+  <section class="contact-page-enquiry" aria-labelledby="contact-enquiry-title">
+    <div class="contact-page-copy">
+      <p class="contact-page-eyebrow">ENQUIRY</p>
+      <h2 id="contact-enquiry-title">Start with<br><span>the story.</span></h2>
+      <p class="contact-page-intro">A few details are enough. We’ll come back with the right next step within two working days.</p>
+      <div class="contact-page-routes">
+        <p><strong>Email</strong><br><a href="mailto:hello@eventoria.studio">hello@eventoria.studio</a></p>
+        <p><strong>Location</strong><br>United Arab Emirates</p>
+      </div>
+    </div>
+    <form class="contact-form" id="contact-page-form">
+      <label for="contact-page-name">Your name</label>
+      <input id="contact-page-name" name="name" type="text" autocomplete="name" placeholder="e.g. Maya Shah" required maxlength="120">
+      <label for="contact-page-email">Work email</label>
+      <input id="contact-page-email" name="email" type="email" autocomplete="email" placeholder="maya@company.com" required>
+      <label for="contact-page-service">How can we help?</label>
+      <select id="contact-page-service" name="service" required>
+        <option value="" selected disabled>Select an enquiry type</option>
+        <option>Creative direction &amp; storytelling</option><option>Experience &amp; event design</option><option>Show &amp; entertainment</option><option>Production &amp; live delivery</option><option>Full project enquiry</option><option>Something else</option>
+      </select>
+      <label for="contact-page-message">Tell us a little more</label>
+      <textarea id="contact-page-message" name="message" rows="4" placeholder="Occasion, place, ambition…"></textarea>
+      <button type="submit">Send enquiry</button>
+      <p class="contact-status" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer contact-page-footer" id="footer">
+  <div class="footer-scene" aria-hidden="true"></div>
+  <div class="footer-grid">
+    <a class="footer-brand" href="index.html" aria-label="Eventoria home"><img src="assets/eventoria-wordmark.svg" alt="Eventoria — Events &amp; Concepts"></a>
+    <div class="footer-column"><h2>EXPLORE</h2><a href="Expertise.html">Expertise</a><a href="Work.html">Work</a><a href="Process.html">Process</a><a href="About.html">About</a></div>
+    <div class="footer-column"><h2>SAY HELLO</h2><a href="mailto:hello@eventoria.studio">hello@eventoria.studio</a><span>+971 00 000 0000</span></div>
+    <div class="footer-column"><h2>FOLLOW</h2><span>Instagram</span><span>LinkedIn</span></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Eventoria Studio / UAE</span><span>Privacy · Cookies · Terms</span></div>
+</footer>
+<script src="script.js?v=contact-20261030-3"></script>
+<script src="contact.js?v=contact-20261030-3"></script>
+<script src="contact-dropdown.js?v=contact-20261109-1"></script>
+<script src="hero.js?v=contact-20261102-1"></script>
+<script type="module" src="report.js?v=20261112-0927"></script>
+<button class="sound-toggle" type="button" aria-pressed="false" aria-label="Turn sound on"><span class="sound-bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="sound-label">SOUND OFF</span></button>
+<audio id="ambient-audio" src="assets/audio/emotion-main.mp3" loop preload="none"></audio>
+<script src="audio.js?v=inner-20261102-1"></script>
+<script src="banner-titles.js?v=1"></script>
+</body>
+</html>
